@@ -8,6 +8,7 @@ fun main() {
     demoString()
     demoWhenAndWhile()
     demoFor()
+    demoScopeFunctions()
     demoList()
     demoMap()
     demoSet()
@@ -282,6 +283,48 @@ fun collectionPipelineDemo() {
         .distinct()
         .groupBy { it % 3 }
     println("Grouped odds*3 by mod 3: $groupedOdds")
+}
+
+
+fun demoScopeFunctions() {
+    println("===== Demo Scope Functions =====")
+
+    val str = "hello"
+
+    // let
+    str?.let {
+        println("let: length of '$it' is ${it.length}")
+    }
+
+    // run
+    val resultRun = str?.run {
+        length + 10
+    }
+    println("run: $resultRun")
+
+    // apply
+    val list = mutableListOf<Int>().apply {
+        add(1)
+        add(2)
+        add(3)
+    }
+    println("apply: $list")
+
+    // also
+    val doubled = list.also {
+        println("also: before map $it")
+    }.map { it * 2 }
+    println("also: after map $doubled")
+
+    // with
+    val sb = StringBuilder()
+    val message = with(sb) {
+        append("Kotlin ")
+        append("Scope ")
+        append("Functions")
+        toString()
+    }
+    println("with: $message")
 }
 
 
