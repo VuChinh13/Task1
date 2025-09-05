@@ -12,10 +12,12 @@ fun main() {
     demoMap()
     demoSet()
     demoCollectionExtensionFunction()
+    collectionPipelineDemo()
 }
 
 // demo variable
 fun demoVariable() {
+    println("===== Demo Variable =====")
     //var - mutable
     var valueVar = 0
     valueVar = 1
@@ -28,6 +30,7 @@ fun demoVariable() {
 
 // demo data type
 fun demoDatatype() {
+    println("===== Data type =====")
     val valueInt: Int = 2
     println(valueInt)
 
@@ -52,6 +55,7 @@ fun demoDatatype() {
 
 // demo operator
 fun demoOperator() {
+    println("===== Demo Operator =====")
     val value1 = 10
     val value2 = 20
 
@@ -83,6 +87,7 @@ fun demoOperator() {
 
 // demo Conversion
 fun demoConversion() {
+    println("===== Demo Conversion =====")
     var valueDouble = 2.32323
 
     val valueInt = valueDouble.toInt()
@@ -100,6 +105,7 @@ fun demoConversion() {
 
 // demo String and String template
 fun demoString() {
+    println("===== Demo String =====")
     val valueString = " Demo string"
 
     println("length: ${valueString.length}")
@@ -115,6 +121,7 @@ fun demoString() {
 }
 
 fun demoWhenAndWhile() {
+    println("===== Demo WhenAndWhile =====")
     while (true) {
         print("Enter value: ")
         val value = readlnOrNull()?.toIntOrNull() ?: 0
@@ -141,6 +148,7 @@ fun demoWhenAndWhile() {
 }
 
 fun demoFor() {
+    println("===== Demo For =====")
     // until
     for (i in 0 until 4) {
         print("$i, ")
@@ -172,6 +180,7 @@ fun demoFor() {
 }
 
 fun demoList() {
+    println("===== Demo List =====")
     // immutable List
     val immutableList = listOf<Int>()
 
@@ -186,6 +195,7 @@ fun demoList() {
 }
 
 fun demoMap() {
+    println("===== Demo Map =====")
     // immutable Map
     val immutableMap = mapOf<String, String>()
 
@@ -197,9 +207,11 @@ fun demoMap() {
     )
     mutableMap["No4"] = "Content4"
     mutableMap.remove("No4")
+    println("last: $mutableMap.last()")
 }
 
 fun demoSet() {
+    println("===== Demo Set =====")
     // immutable Set
     val immutableSet = setOf<String>()
 
@@ -214,35 +226,62 @@ fun demoSet() {
 }
 
 fun demoCollectionExtensionFunction() {
-    val list = mutableListOf<Int>(1, 2, 3, 4)
+    println("===== Demo Collection Extension Function =====")
+    val list = mutableListOf(1, 2, 3, 4)
 
     val list1 = list.map { it * 2 }
-    println(list1)
+    println("map: $list1")
 
     val list2 = list.filter { it % 2 == 0 }
-    println(list2)
+    println("filter: $list2")
 
     val value = list.any { it % 2 == 0 }
-    println(value)
+    println("any (có số chẵn?): $value")
 
     val list3 = list.take(3)
-    println(list3)
+    println("take(3): $list3")
 
     val first = list.first()
-    println(first)
+    println("first: $first")
 
     val last = list.last()
-    println(last)
+    println("last: $last")
 
-    val sort1 = list.sortBy { it }
-    println(sort1)
+    list.sortBy { it }         // sắp xếp tại chỗ
+    println("sau sortBy: $list") // in ra list đã được sắp xếp
 
     val sort2 = list.sortedByDescending { it }
-    println(sort2)
+    println("sortedByDescending: $sort2")
 
     val sum = list.reduce { acc, next -> acc + next }
-    println(sum)
+    println("reduce (sum): $sum")
+
+    println("all > 0: ${list.all { it > 0 }}")
+
+    println("none < 0: ${list.none { it < 0 }}")
 }
 
+
+fun collectionPipelineDemo() {
+    println("===== Demo Collection Pipe =====")
+    val list = mutableListOf(1, 2, 3, 4, 5, 6)
+
+    // Lọc số chẵn → nhân 2 → sắp xếp giảm dần → lấy 3 phần tử đầu → tính tổng
+    val sumTop3 = list
+        .filter { it % 2 == 0 }
+        .map { it * 2 }
+        .sortedDescending()
+        .take(3)
+        .sum()
+    println("Sum top3 even*2: $sumTop3")
+
+    // Lọc số lẻ → nhân 3 → distinct → groupBy theo (n % 3)
+    val groupedOdds = list
+        .filter { it % 2 == 1 }
+        .map { it * 3 }
+        .distinct()
+        .groupBy { it % 3 }
+    println("Grouped odds*3 by mod 3: $groupedOdds")
+}
 
 
