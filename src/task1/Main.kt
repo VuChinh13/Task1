@@ -292,12 +292,12 @@ fun demoScopeFunctions() {
     val str = "hello"
 
     // let
-    str?.let {
+    str.let {
         println("let: length of '$it' is ${it.length}")
     }
 
     // run
-    val resultRun = str?.run {
+    val resultRun = str.run {
         length + 10
     }
     println("run: $resultRun")
