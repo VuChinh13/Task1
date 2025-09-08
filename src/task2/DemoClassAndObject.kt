@@ -37,11 +37,8 @@ class Product(
 
 fun main() {
     val product = Product("Tai nghe Bluetooth", 399_000.0, 2)
-
     product.showInfo()
-
     println("Sau khi giảm giá 10%: ${product.discount(10.0)}")
-
     product.addStock(3)
     println("Sau khi nhập thêm: ${product.count}")
 

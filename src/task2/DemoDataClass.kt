@@ -27,15 +27,14 @@ object UserApi {
 }
 
 fun main(args: Array<String>) {
-    println("=== 1) Data class + Companion Object ===")
     val guest = User.createGuest()
     println("User mặc định: $guest")
+    println()
 
-    println("\n=== 2) Singleton API ===")
     val users = UserApi.fetchUsers()
     users.forEach { println(it) }
+    println()
 
-    println("\n=== 3) Tìm user có id=2 ===")
     val user = UserApi.findUserById(2)
     println(user ?: "Không tìm thấy user")
 }
